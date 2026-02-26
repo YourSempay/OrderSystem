@@ -18,6 +18,8 @@ public class Order
     public string Items { get; set; } 
     public DateTime OrderDate { get; set; } = DateTime.Now;
     public OrderStatus Status { get; set; } = OrderStatus.New;
+    public string Courier { get; set; } = "Не назначен";
+    public DateTime? DeliveryTime { get; set; }
 
     public void NextStatus()
     {
@@ -33,6 +35,6 @@ public class Order
 
     public string GenerateReceipt()
     {
-        return $"Чек №{Id}\nКлиент: {ClientName}\nАдрес: {Address}\nТовары: {Items}\nДата: {OrderDate}\nСтатус: {Status}";
+        return $"Чек №{Id}\nКлиент: {ClientName}\nТелефон: {Courier}\nАдрес: {Address}\nТовары: {Items}\nДата: {OrderDate}\nСтатус: {Status}\nВремя доставки: {(DeliveryTime.HasValue ? DeliveryTime.Value.ToString() : "не назначено")}";
     }
 }

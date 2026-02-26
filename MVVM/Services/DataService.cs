@@ -14,6 +14,7 @@ public class DataService
     {
         if (!File.Exists(_filePath))
             return new List<Order>();
+
         string json = File.ReadAllText(_filePath);
         return JsonSerializer.Deserialize<List<Order>>(json) ?? new List<Order>();
     }

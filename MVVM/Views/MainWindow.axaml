@@ -10,34 +10,34 @@
         Height="400"
         x:DataType="viewModels:MainWindowViewModel">
         <Grid Margin="10">
-                <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-                <DataGrid ItemsSource="{Binding FilteredOrders}" SelectedItem="{Binding SelectedOrder}" AutoGenerateColumns="False" Grid.Row="0">
-                        <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Клиент" Binding="{Binding ClientName}"/>
-                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
-                                <DataGridTextColumn Header="Товары" Binding="{Binding Items}"/>
-                                <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
-                        </DataGrid.Columns>
-                </DataGrid>
+        <TextBox Watermark="Поиск по клиенту или адресу" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
 
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1" HorizontalAlignment="Center">
-                        <Button Content="Добавить заказ" Command="{Binding AddOrderCommand}" Width="120" Margin="5"/>
-                        <Button Content="Назад статус" Command="{Binding PreviousStatusCommand}" Width="120" Margin="5"/>
-                        <Button Content="Вперед статус" Command="{Binding NextStatusCommand}" Width="120" Margin="5"/>
-                        <Button Content="Показать чек" Command="{Binding ShowReceiptCommand}" Width="120" Margin="5"/>
+        <DataGrid ItemsSource="{Binding FilteredOrders}" SelectedItem="{Binding SelectedOrder}" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding ClientName}"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
+                <DataGridTextColumn Header="Товары" Binding="{Binding Items}"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Курьер" Binding="{Binding Courier}"/>
+                <DataGridTextColumn Header="Время доставки" Binding="{Binding DeliveryTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
-                        <ComboBox Width="120" Margin="10,0,0,0" SelectedItem="{Binding FilterStatus}">
-                                <ComboBoxItem Content="All"/>
-                                <ComboBoxItem Content="New"/>
-                                <ComboBoxItem Content="Processing"/>
-                                <ComboBoxItem Content="Delivering"/>
-                                <ComboBoxItem Content="Completed"/>
-                        </ComboBox>
-                </StackPanel>
-        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button Content="Добавить заказ" Command="{Binding AddOrderCommand}" Width="120" Margin="5"/>
+            <Button Content="Назад статус" Command="{Binding PreviousStatusCommand}" Width="120" Margin="5"/>
+            <Button Content="Вперед статус" Command="{Binding NextStatusCommand}" Width="120" Margin="5"/>
+            <Button Content="Показать чек" Command="{Binding ShowReceiptCommand}" Width="120" Margin="5"/>
+            <ComboBox Width="120" Margin="10,0,0,0"
+                      ItemsSource="{Binding Statuses}"
+                      SelectedItem="{Binding FilterStatus, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+    </Grid>
 </Window>
