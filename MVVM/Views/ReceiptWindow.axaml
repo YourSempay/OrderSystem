@@ -1,9 +1,25 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MVVM.Views.ReceiptWindow"
+        Title="Чек заказа"
+        Width="400"
+        Height="300"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="MVVM.Views.ReceiptWindow"
-        Title="ReceiptWindow">
-    Welcome to Avalonia!
+        mc:Ignorable="d"
+        x:DataType="vm:ReceiptWindowViewModel"
+        xmlns:vm="using:MVVM.ViewModels">
+
+    <Grid Margin="10">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <TextBlock Text="{Binding ReceiptText}" TextWrapping="Wrap"/>
+        </ScrollViewer>
+
+        <Button Content="Закрыть"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Width="80"
+                Margin="0,0,0,10"
+                Click="CloseButton_Click"/>
+    </Grid>
 </Window>
